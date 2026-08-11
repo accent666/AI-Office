@@ -1,0 +1,13 @@
+{
+    "user": {
+        "name": "Ярослав",
+        "last_fact": ", что я люблю AI Office"
+    },
+    "office": {
+        "assistant": "Мелисса",
+        "developer": "Маркус",
+        "analyst": "Феликс",
+        "researcher": "Лукас",
+        "creative": "Крис"
+    }
+}

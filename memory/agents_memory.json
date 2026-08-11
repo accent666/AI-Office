@@ -1,0 +1,22 @@
+{
+  "melissa": {
+    "name": "Мелисса",
+    "role": "Главный ассистент AI-офиса"
+  },
+  "marcus": {
+    "name": "Маркус",
+    "role": "Developer"
+  },
+  "felix": {
+    "name": "Феликс",
+    "role": "Аналитик"
+  },
+  "lucas": {
+    "name": "Лукас",
+    "role": "Researcher"
+  },
+  "chris": {
+    "name": "Крис",
+    "role": "Creative Content"
+  }
+}
