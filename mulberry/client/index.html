@@ -910,6 +910,13 @@ body.ingame .top .who{display:none}
   #v-home .hg button{height:calc(100vh - 150px)}
   .tabs button{min-height:50px}.tabs::before{height:36px;width:36px;margin-bottom:2px}
 }
+/* совсем низкие (Telegram со своей шапкой): поля баккары — обратно в нижнюю панель, карты меньше */
+@media (max-height:345px){
+  #v-bc .bczones{position:static;transform:none;width:auto;max-width:300px}
+  #v-bc .bct{justify-content:center;padding-top:16px}
+  .gscr .bct .bjh .cd,.gscr .cgt .bjh .cd{--w:38px}
+  .gscr .bct .bjh,.gscr .cgt .bjh{min-height:calc(38px*1.395)}
+}
 /* узкие экраны (меньше 760 по ширине) */
 @media (max-width:759px){
   .gbot .bjacts .btn{min-width:96px;padding:0 10px;font-size:14px}
