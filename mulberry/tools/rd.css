@@ -1,0 +1,43 @@
+/* ===== REDESIGN v65 «клуб» — весь блок можно удалить для отката ===== */
+:root{--bg:#0d090b;--card:#1a1216;--card2:#291d23;--line:rgba(255,226,236,.08);--text:#f6eee8;--muted:#9c8a91;--gold:#e3305f;--gold2:#ff5c86;--on:#fff;
+ --table:#150e12;--rim:#2a1e24;--silbg:#3a2c33;--silfg:#9c8a91;--back:#1a1216;--edge:rgba(255,226,236,.07)}
+:root[data-theme=light]{--bg:#f6f1ed;--card:#fff;--card2:#efe7e2;--line:rgba(60,20,35,.09);--text:#1d1216;--muted:#86737a;--gold:#d6285a;--gold2:#d6285a;--on:#fff;
+ --table:#e6dcd6;--rim:#d4c7c0;--silbg:#d4c7c0;--silfg:#f6f1ed;--edge:rgba(60,20,35,.06)}
+html,body{background:var(--bg)}
+#app{background:radial-gradient(130% 55% at 50% -8%,rgba(176,23,79,.22),transparent 60%)}
+:root[data-theme=light] #app{background:radial-gradient(130% 50% at 50% -8%,rgba(214,40,90,.10),transparent 60%)}
+/* шапка */
+.who span{color:var(--gold2);letter-spacing:.28em}
+.bal{background:var(--card);box-shadow:inset 0 0 0 1px var(--edge)}
+/* карточки: тонкая кромка вместо плоской серой плашки */
+.bon,.rows,.item,.strip button,.stats div,.seg,.tiles button,.opt>*,.q,.qs>*,.cj input,.pcode input{box-shadow:inset 0 0 0 1px var(--edge)}
+.seg button.on{background:var(--gold);color:var(--on)}
+.btn{background:var(--card2)}
+.btn.g,.item .btn.g{background:var(--gold);color:var(--on)}
+/* подписи разделов */
+.lbl{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:24px 4px 10px}
+.lbl button{font-size:12px;letter-spacing:.04em;text-transform:none;color:var(--gold2)}
+/* главный баннер */
+.hb{background:radial-gradient(120% 130% at 0% 0%,#c21a57 0%,#6a0f33 42%,#1c0a12 100%);box-shadow:0 14px 34px rgba(120,10,50,.35),inset 0 0 0 1px rgba(255,255,255,.08)}
+.hbb{background:rgba(0,0,0,.28);backdrop-filter:none}
+.hbb .btn{background:#f6eee8;color:#1a0a10;font-size:16px}
+/* плитки игр */
+.gg button{border-radius:22px;box-shadow:0 10px 24px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.08)}
+.gg .gp{background:rgba(255,255,255,.95);color:#1a0a10;border-radius:12px}
+/* нижнее меню */
+.tabs{background:color-mix(in srgb,var(--bg) 88%,transparent)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 var(--edge)!important;border:0!important}
+.tabs button.on{color:var(--gold2)}
+.tabs button.on svg{stroke:var(--gold2)}
+/* профиль */
+.prof{box-shadow:inset 0 0 0 1px var(--edge)}
+/* плитки игр на главной — цветные целиком, как во вкладке «Игры» */
+.hg button{position:relative;display:flex;flex-direction:column;justify-content:flex-end;height:186px;border-radius:20px;overflow:hidden;text-align:left;color:#fff;padding:0 6px 12px;background:#000;box-shadow:0 10px 24px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.08)}
+.hg .ha{position:absolute!important;inset:0;height:auto!important;border-radius:0!important;margin:0!important}
+.hg .ha img{height:100%!important;object-position:50% 20%}
+.hg .ha::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.78) 92%)}
+.hg b,.hg span,.hg em{position:relative;z-index:1}
+.hg b{font-family:var(--disp);font-weight:400;font-size:18px}
+.hg span{color:rgba(255,255,255,.78)}
+.hg em.off{color:rgba(255,255,255,.6)}
+.tabs{background:var(--bg)!important;backdrop-filter:none;-webkit-backdrop-filter:none}
+#ts .lbl{text-transform:none;letter-spacing:0;font-size:13px;color:var(--muted)}

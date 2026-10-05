@@ -1,0 +1,7 @@
+/* v65 производительность: у лежащих карт без переворота — без 3D-слоёв */
+.cd.up.nolift{perspective:none}.cd.up.nolift .in{transform-style:flat}.cd.up.nolift .b{display:none}.cd.up.nolift .f{backface-visibility:visible;-webkit-backface-visibility:visible}
+.dko .fan .cd{perspective:none}.dko .fan .cd .in{transform:none!important;transform-style:flat;transition:none;animation:none}.dko .fan .cd .f{display:none}.dko .fan .cd .b{transform:none;backface-visibility:visible;-webkit-backface-visibility:visible}
+.deck .cd,.burn .cd{perspective:none}.deck .cd .in,.burn .cd .in{transform:none!important;transform-style:flat;transition:none;animation:none}.deck .cd .f,.burn .cd .f{display:none}.deck .cd .b,.burn .cd .b{transform:none;backface-visibility:visible;-webkit-backface-visibility:visible}
+/* v65: кружок таймера не обрезается строкой; веер соперника в дураке не налезает на ник */
+.tmr.in{top:0;vertical-align:middle;overflow:visible}.dkmsg .tmr.in{flex:none}
+.dko .fan{height:46px}.dko .fan .cd{top:2px}.dko>.tmr{top:46px}

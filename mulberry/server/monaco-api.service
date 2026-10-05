@@ -1,0 +1,13 @@
+[Unit]
+Description=MONACO API (accounts, balance, skins) :8098
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /root/work/monaco/api.py
+WorkingDirectory=/root/work/monaco
+Restart=on-failure
+RestartSec=3
+MemoryMax=80M
+
+[Install]
+WantedBy=multi-user.target

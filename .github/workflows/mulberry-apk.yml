@@ -1,0 +1,79 @@
+# Сборка подписанного APK игры MULBERRY. Запуск: вкладка Actions → «MULBERRY APK» → Run workflow.
+# Готовый файл — внизу страницы запуска, раздел Artifacts → MULBERRY-apk.
+# Нужны 4 секрета (Settings → Secrets and variables → Actions): KEYSTORE_BASE64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD.
+name: MULBERRY APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "mulberry/client/**"
+      - "mulberry/app/**"
+      - ".github/workflows/mulberry-apk.yml"
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: mulberry/app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mulberry/app/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - name: Проверить секреты подписи
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          for v in KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do
+            if [ -z "${!v}" ]; then echo "::error::Нет секрета $v — добавь его в Settings → Secrets and variables → Actions"; exit 1; fi
+          done
+          echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+
+      - name: Установить зависимости и скопировать игру в Android-проект
+        run: |
+          npm ci
+          npx cap sync android
+
+      - name: Собрать release-APK
+        working-directory: mulberry/app/android
+        env:
+          KEYSTORE_FILE: ${{ runner.temp }}/release.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          export APP_BUILD=$(( GITHUB_RUN_NUMBER + 1 ))  # номер сборки растёт сам; 1 — у первой сборки, сделанной вручную
+          echo "APP_BUILD=$APP_BUILD" >> "$GITHUB_ENV"
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
+          mkdir -p "$GITHUB_WORKSPACE/out"
+          cp app/build/outputs/apk/release/app-release.apk "$GITHUB_WORKSPACE/out/MULBERRY-$APP_BUILD.apk"
+          rm -f "$RUNNER_TEMP/release.jks"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MULBERRY-apk
+          path: out/*.apk
+          retention-days: 90
+
+      - name: Итог
+        run: |
+          echo "### Готово: MULBERRY-${APP_BUILD}.apk" >> "$GITHUB_STEP_SUMMARY"
+          echo "Номер сборки: **${APP_BUILD}** — впиши его в version.json на сервере, когда выложишь APK в канал." >> "$GITHUB_STEP_SUMMARY"
