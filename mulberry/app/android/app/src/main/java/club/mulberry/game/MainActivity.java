@@ -15,6 +15,8 @@ public class MainActivity extends BridgeActivity {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         getWindow().getDecorView().setBackgroundColor(0xFF0D090B);
         getBridge().getWebView().setBackgroundColor(0xFF0D090B);
+        // крупный шрифт в настройках телефона не должен ломать вёрстку игры
+        getBridge().getWebView().getSettings().setTextZoom(100);
         // вырез камеры обрабатывает сам Capacitor (SystemBars): отдаёт его в CSS env(safe-area-inset-*), вёрстка их учитывает
         hideBars();
     }

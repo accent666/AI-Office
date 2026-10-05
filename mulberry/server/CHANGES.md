@@ -23,6 +23,9 @@
 - `.session` создастся сам.
 
 ## Как выкатить
+Проще всего: распаковать архив на сервере и выполнить `bash deploy.sh` (бэкап, замена, перезапуск, проверка). Откат: `bash deploy.sh rollback`.
+
+Вручную:
 ```bash
 cd /root/work/monaco
 cp api.py api.v84-pre.py && cp bot.py bot.v84-pre.py          # бэкап

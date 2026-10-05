@@ -680,115 +680,250 @@ html,body{background:var(--bg)}
 .updbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + var(--sab));z-index:130;display:flex;align-items:center;gap:8px;width:min(92%,480px);background:var(--card2);border-radius:16px;padding:10px 10px 10px 14px;box-shadow:0 8px 28px rgba(0,0,0,.4),inset 0 0 0 1px var(--edge,var(--line))}
 .updbar>div{flex:1;min-width:0}.updbar b{display:block;font-size:14px}.updbar span{display:block;font-size:11.5px;color:var(--muted)}.updbar #updx{width:36px;padding:0}
 @media (orientation:landscape) and (max-height:560px){.updbar{bottom:calc(12px + var(--sab))}}
-/* ===== LANDSCAPE (телефон горизонтально): только вёрстка, логика не меняется. Портрет (Telegram Mini App) — как было ===== */
+.hg .hx{display:none}
+/* ===== LANDSCAPE: телефон горизонтально (приложение и Telegram). Портрет не меняется: всё внутри этого @media ===== */
 @media (orientation:landscape) and (max-height:560px){
-:root{--sal:env(safe-area-inset-left);--sar:env(safe-area-inset-right);--side:clamp(214px,29vw,262px);--lpad:calc(10px + var(--sal));--rpad:calc(10px + var(--sar))}
-#app{max-width:none;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
-/* меню: нижние вкладки → боковая панель слева */
-.tabs{position:relative;grid-column:1;grid-row:1/3;left:auto;right:auto;bottom:auto;padding:calc(6px + var(--sat)) 6px calc(6px + var(--sab)) calc(6px + var(--sal));box-shadow:inset -1px 0 0 var(--edge,var(--line))!important}
-.tabs div{flex-direction:column;justify-content:center;width:68px;gap:4px}
-.tabs button{flex:none;min-height:58px;border-radius:14px}
-.top{grid-column:2;grid-row:1;padding:calc(6px + var(--sat)) var(--rpad) 6px 16px}
-.who .av{width:32px;height:32px}
-.bal{height:36px}
-.scr{grid-column:2;grid-row:2;min-height:0;padding:2px var(--rpad) calc(14px + var(--sab)) 16px}
-.scr:not(.gscr)>*{max-width:900px;margin-left:auto;margin-right:auto}
-.scr:not(.gscr)>.lbl{max-width:892px;margin-left:auto;margin-right:auto;margin-top:16px}
-.pbar{margin-bottom:8px}
-/* главная */
-#v-home:not(.hide){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:14px;align-content:start}
-#v-home>*{grid-column:1/-1;max-width:none;width:100%}
-#v-home>.hb{grid-column:1;grid-row:1/4;margin:0;display:flex;flex-direction:column;justify-content:space-between}
-#v-home>.lbl:nth-child(2){grid-column:2;grid-row:1;margin-top:0}
-#v-home>.hg{grid-column:2;grid-row:2/4;margin:0}
-#v-home .hg button{height:150px}
-#v-home>.bon{margin-top:14px}
-.qs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-.strip{margin:0;padding:0 0 4px}
-/* игры */
-.gg{grid-template-columns:repeat(2,minmax(0,1fr))}
-.gg button{flex-direction:row;align-items:stretch}
-.gg img{width:46%;aspect-ratio:auto;height:100%;min-height:150px;-webkit-mask-image:linear-gradient(90deg,#000 70%,transparent);mask-image:linear-gradient(90deg,#000 70%,transparent)}
-.gg .gt{flex:1;min-width:0;margin:0 0 0 -10px;padding:14px 12px 58px 0}
-.gg .gp{left:auto;width:calc(54% - 14px)}
-.gg3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.gg3 img{aspect-ratio:16/9;object-fit:cover;width:100%}
-/* лобби игр */
-.tiles button{min-height:96px}
-.opt{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-/* маркет / инвентарь */
-.grid{grid-template-columns:repeat(auto-fill,minmax(168px,1fr))}
-/* профиль */
-#v-me:not(.hide){display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);column-gap:14px;align-content:start}
-#v-me>*{grid-column:2;max-width:none;width:100%}
-#v-me>.prof{grid-column:1;grid-row:1/8;align-self:start;position:sticky;top:0}
+:root{--sal:env(safe-area-inset-left);--sar:env(safe-area-inset-right);--lpad:calc(12px + var(--sal));--rpad:calc(12px + var(--sar));--rail:calc(78px + var(--sal))}
+
+/* ---------- каркас меню: слева панель (лого, разделы, аватар), справа экран ---------- */
+#app{max-width:none;display:grid;grid-template-columns:var(--rail) minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.tabs{position:relative;grid-column:1;grid-row:1;left:auto;right:auto;bottom:auto;padding:calc(10px + var(--sat)) 6px calc(64px + var(--sab)) calc(6px + var(--sal));flex-direction:column;justify-content:flex-start;align-items:stretch;gap:0;box-shadow:inset -1px 0 0 var(--edge,var(--line))!important}
+.tabs::before{content:"";display:block;height:42px;margin:0 auto 6px;width:42px;flex:none;background:url(c/logo.svg) center/contain no-repeat;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+.tabs>div{flex-direction:column;justify-content:center;gap:2px;width:100%;flex:1;min-height:0}
+.tabs button{flex:none;min-height:54px;border-radius:14px;font-size:10.5px;gap:2px}
+.tabs button.on{background:color-mix(in srgb,var(--gold2) 12%,transparent)}
+.top{position:fixed;top:calc(8px + var(--sat));right:var(--rpad);left:auto;padding:0;z-index:30;pointer-events:none;gap:0}
+.top .who{position:fixed;left:calc(var(--sal) + 17px);bottom:calc(10px + var(--sab));flex:none;width:44px;pointer-events:auto;z-index:31}
+.top .who>div:last-child{display:none}
+.top .who .av{width:44px;height:44px;border:2px solid var(--edge,var(--line))}
+.top .bal{pointer-events:auto;height:38px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.35),inset 0 0 0 1px var(--edge,var(--line))}
+body[data-view=home] .top .bal,body[data-view=me] .top .bal{display:none}
+.scr{grid-column:2;grid-row:1;min-height:0;padding:calc(10px + var(--sat)) var(--rpad) calc(16px + var(--sab)) 16px}
+.scr>.pbar{min-height:40px;margin:0 160px 10px 0}
+.pbar b{font-size:18px}
+.lbl{margin:16px 2px 8px}
+.note{margin-top:12px}
+
+/* ---------- главная: шапка-баннер и лента всех игр ---------- */
+#v-home .hb{display:flex;align-items:center;gap:16px;padding:10px 12px 10px 14px;margin:0 0 12px;border-radius:20px}
+#v-home .hbt{flex:1;min-width:0}.hbt img{width:40px;height:46px}.hbt b{font-size:19px}
+#v-home .hbb{margin:0;flex:none;gap:14px;padding:6px 6px 6px 14px}
+#v-home .hbb b{font-size:20px}
+#v-home .hbb .btn{min-height:42px;padding:0 28px}
+#v-home>.lbl:nth-child(2){margin-top:0}
+#v-home .hg{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;margin:0 calc(-1 * var(--rpad)) 4px -16px;padding:0 var(--rpad) 6px 16px;scrollbar-width:none;overscroll-behavior-x:contain}
+#v-home .hg::-webkit-scrollbar{display:none}
+#v-home .hg button{flex:0 0 auto;width:clamp(150px,21vw,190px);height:min(228px,calc(100vh - 160px));scroll-snap-align:start;padding:0 6px 12px}
+#v-home .hg .hx{display:flex!important}
+#v-home .hg .ha{aspect-ratio:auto!important}
+#v-home .hg b{font-size:19px}
+#v-home .hg span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#v-home .bon{margin:12px 0 0}
+#v-home .qs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+#v-home .strip{margin:0 calc(-1 * var(--rpad)) 0 -16px;padding:0 var(--rpad) 4px 16px}
+#v-home .stats{max-width:620px}
+
+/* ---------- все игры: 4 большие карточки + ряд «против дилера» ---------- */
+#v-games:not(.hide){display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:10px;align-content:start}
+#v-games>*{grid-column:1/-1}
+#v-games>.pbar{margin-bottom:6px}
+#v-games .gg{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#v-games .gg img{aspect-ratio:16/11}
+#v-games .gg .gt{padding:0 12px 54px}
+#v-games .gg b{font-size:21px!important}
+#v-games .gg .gp{left:10px;right:10px;bottom:10px}
+#v-games>.lbl:nth-of-type(1){grid-column:1/4}
+#v-games>.lbl:nth-of-type(2){grid-column:4/5;grid-row:3}
+#v-games>.gg3:not(.wide){grid-column:1/4}
+#v-games>.gg3.wide{grid-column:4/5;grid-row:4;grid-template-columns:1fr}
+#v-games .gg3.wide button{flex-direction:column;align-items:stretch;gap:0;padding:0 0 9px}
+#v-games .gg3.wide img{width:100%;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)}
+#v-games .gg3.wide div{padding:0}
+#v-games .gg3.wide b,#v-games .gg3.wide span{display:block;margin:0 9px}
+#v-games .gg3.wide b{margin-top:-4px;font-size:13.5px}
+#v-games .gg3.wide span{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- лобби игры: слева режим и создание стола, справа открытые столы ---------- */
+#v-setup:not(.hide),#v-bjset:not(.hide),#v-dkset:not(.hide),#v-bcset:not(.hide){columns:2;column-gap:18px;column-fill:auto}
+#v-setup>*,#v-bjset>*,#v-dkset>*,#v-bcset>*{break-inside:avoid}
+#v-setup>.pbar,#v-bjset>.pbar,#v-dkset>.pbar,#v-bcset>.pbar{column-span:all}
+#v-setup>.lbl,#v-bjset>.lbl,#v-dkset>.lbl,#v-bcset>.lbl{break-before:column;margin-top:0}
+#v-setup>.seg,#v-dkset>.seg{margin-top:0}
+.tiles button{min-height:104px}
+.rcode.cj{margin-top:10px}
+.opt .trow{padding:13px 14px}
+
+/* ---------- маркет, инвентарь ---------- */
+#v-shop:not(.hide){display:grid;grid-template-columns:minmax(0,1fr) 150px;column-gap:10px;align-content:start}
+#v-shop>*{grid-column:1/-1}
+#v-shop>.seg:first-child{grid-column:1;margin:0 0 10px}
+#v-inv>.seg{margin-top:0}
+.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+
+/* ---------- профиль: карточка слева, всё остальное справа ---------- */
+#v-me:not(.hide){display:grid;grid-template-columns:minmax(0,290px) minmax(0,1fr);column-gap:16px;align-content:start}
+#v-me>*{grid-column:2}
+#v-me>.prof{grid-column:1;grid-row:1/span 9;align-self:start;position:sticky;top:0}
 #v-me>.rows.nav{margin-top:0}
 #v-me>.lbl{margin-top:14px}
-/* шторки по центру, не во всю ширину */
-.bsheet{left:0;right:0;max-width:560px;max-height:calc(100% - 8px);overflow-y:auto}
-.rz{max-height:100%;overflow-y:auto}
-.gscr .rz{left:auto;right:0;top:0;bottom:0;width:calc(var(--side) + var(--rpad) + 14px);border-radius:18px 0 0 18px;padding:calc(46px + var(--sat)) var(--rpad) calc(8px + var(--sab)) 14px;display:flex;flex-direction:column;justify-content:safe flex-end;box-shadow:-6px 0 24px rgba(0,0,0,.35)}
+
+/* ---------- шторки: по центру экрана, кнопка действия всегда видна ---------- */
+.bsheet{left:0;right:0;top:50%;bottom:auto;translate:0 -50%;width:min(620px,calc(100% - 24px));max-width:none;margin:0 auto;border-radius:20px;max-height:calc(100% - 16px);overflow-y:auto;padding:14px 18px 0}
+.bsheet>:last-child{margin-bottom:14px}
+#ts #tsgo{position:sticky;bottom:0;z-index:3;box-shadow:0 14px 0 var(--bg),0 -10px 14px var(--bg)}
+#ts .lvg{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
+.toast{max-width:60%}
+.updbar{left:auto;right:var(--rpad);transform:none;width:min(420px,60%)}
+
+/* ================= ИГРОВЫЕ СТОЛЫ: стол во весь экран =================
+   сверху: слева «Выйти» и название, справа баланс; внизу: фишки слева, ставки по центру, кнопки справа */
+body.ingame #app{grid-template-columns:minmax(0,1fr)}
+body.ingame .top{top:calc(8px + var(--sat))}
+body.ingame .top .bal{height:38px}
+body.ingame .top .who{display:none}
+.scr.gscr:not(.hide),#v-bj.gscr:not(.hide),#v-pt.gscr:not(.hide){grid-column:1;grid-row:1;display:block;position:relative;overflow:hidden;padding:0;--ft:calc(var(--sat) + 54px);--fb:calc(var(--sab) + 70px);--fx:calc(var(--sal) + 30px);--fxr:calc(var(--sar) + 30px)}
+/* шапка стола */
+.gscr>.pbar{position:absolute;z-index:8;top:calc(8px + var(--sat));left:var(--lpad);right:calc(var(--rpad) + 150px);height:38px;min-height:0;margin:0;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;pointer-events:none}
+.gscr>.pbar>*{pointer-events:auto}
+.gscr>.pbar>[data-exit]{order:-2;flex:none;height:38px;min-height:38px;padding:0 14px 0 11px;border-radius:999px;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.35),inset 0 0 0 1px var(--edge,var(--line))}
+.gscr>.pbar>div{order:-1;flex:0 1 auto;max-width:210px;pointer-events:none}
+.gscr>.pbar b{display:block;font-size:14px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.gscr>.pbar span{font-size:11px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gscr>.pbar>.btn.sm:not([data-exit]){order:1;margin-left:auto;flex:none;height:38px;min-height:38px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.35),inset 0 0 0 1px var(--edge,var(--line))}
+.gscr>.pbar>.btn.sm:not([data-exit])+.btn.sm:not([data-exit]){margin-left:0}
+#cghelp{width:38px!important}
+/* сукно: широкий овал от края до края */
+.gscr #felt,.gscr #stf,#v-bj .bjt,#v-pt .bjt,.gscr .bct,.gscr .dkt,#rgame .rtab{position:absolute!important;left:var(--fx);right:var(--fxr);top:var(--ft);bottom:var(--fb);width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important;flex:none}
+.gscr #felt,.gscr #stf{border-radius:50%/50%}
+#v-bj .bjt,#v-pt .bjt,.gscr .bct,#rgame .rtab{border-radius:34%/50%}
+.gscr .dkt{border-radius:999px}
+/* нижняя панель: фишки, ставки, кнопки */
+.gscr>.gbot,#rgame>.gbot{position:absolute;z-index:7;left:var(--lpad);right:var(--rpad);bottom:calc(8px + var(--sab));min-height:0!important;margin:0;padding:0!important;display:flex;flex-direction:row;align-items:flex-end;justify-content:space-between;gap:12px;pointer-events:none}
+.gscr>.gbot>*,#rgame>.gbot>*{pointer-events:auto}
+.gbot .btn{min-height:46px;border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.gbot .btn:not(.g):not(.r):not(.bh):not(.bs):not(.bd):not(.bp){background:color-mix(in srgb,var(--card) 92%,transparent);box-shadow:0 6px 16px rgba(0,0,0,.35),inset 0 0 0 1px var(--edge,var(--line))}
+.gbot .chipsel{margin:0!important;gap:6px;flex:none;justify-content:flex-start;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.42);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.gbot .chipsel .pchip{width:42px!important;height:42px!important}
+.gbot .chipsel .pchip.on{transform:translateY(-5px)}
+.gbot .bjacts{margin:0!important;display:flex;gap:8px;flex:none}
+.gbot .bjacts .btn{min-width:112px;padding:0 16px;font-size:15px;white-space:nowrap}
+.gbot .acts{margin:0;display:flex;gap:8px}
+.gbot .acts .btn{min-width:104px;padding:0 14px;font-size:15px;white-space:nowrap}
+/* сообщения стола — на сукне, по центру */
+.gbot>.tmsg,.gbot>.bjmsg{position:fixed;left:50%;top:calc(var(--sat) + 50%);transform:translate(-50%,-50%);z-index:6;width:auto;max-width:60%;height:auto;min-height:0;margin:0!important;padding:4px 14px;border-radius:12px;background:rgba(0,0,0,.5);font-size:15px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.gbot>.tmsg:empty,.gbot>.bjmsg:empty{display:none}
+.gbot>.res{position:fixed;left:var(--lpad);bottom:calc(14px + var(--sab));margin:0!important;max-width:34%;text-align:left;font-size:14px;line-height:1.3;padding:6px 12px;border-radius:12px;background:rgba(0,0,0,.5);pointer-events:none}
+.gbot>.res:empty{display:none}
+
+#v-bj .gbot>.tmsg,#v-pt .gbot>.tmsg{left:var(--lpad);top:auto;bottom:calc(var(--sab) + 66px);transform:none;max-width:min(300px,36%)}
+/* --- покер --- */
+#v-poker.gscr,#v-st.gscr,#v-bj.gscr,#v-pt.gscr{--fb:calc(var(--sab) + 18px)}
+#v-poker .gbot,#v-st .gbot{justify-content:flex-end}
+#pacts .acts,#stacts .acts{grid-template-columns:none}
+#pnext,#stnext{margin:0!important;width:auto!important;min-width:220px}
+.felt .mine{bottom:2%}
+.felt .mine .cd.lg{--w:50px}.omaha .felt .mine .cd.lg{--w:44px}
+.board{top:45%}.board .slot{width:40px;height:56px}
+.stg{top:58%}
+/* рейз: панель справа во всю высоту */
+.gscr .rzbg{position:fixed;inset:0;z-index:40}
+.gscr .rz{position:fixed;left:auto;right:0;top:0;bottom:0;width:calc(300px + var(--sar));border-radius:20px 0 0 20px;padding:calc(56px + var(--sat)) calc(14px + var(--sar)) calc(12px + var(--sab)) 16px;display:flex;flex-direction:column;justify-content:safe flex-end;overflow-y:auto;box-shadow:-8px 0 30px rgba(0,0,0,.45);animation:rzin .2s ease-out}
+@keyframes rzin{from{transform:translateX(100%)}}
 .gscr .rz.hide{display:none}
 .gscr .rzstk{display:none}
-.gscr .rzp{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.gscr .rzp .btn{min-height:40px;padding:0 2px;font-size:11px;white-space:nowrap;letter-spacing:-.02em}
-.gscr .rzk{flex-wrap:wrap;justify-content:center}.gscr .rzc{flex-wrap:wrap;justify-content:center}
-.gscr .rzs{margin:8px 0}.gscr .rzh{margin-bottom:4px}.gscr .rzk{margin:0 0 6px}.gscr .rzc>*{transform:scale(.85);margin:-3px}
-.toast{max-width:60%}
+.gscr .rzk{margin:0 0 6px}.gscr .rzc{justify-content:center;flex-wrap:wrap}.gscr .rzc .pchip{width:40px;height:40px}
+.gscr .rzp{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.gscr .rzp .btn{min-height:38px;font-size:11.5px;white-space:nowrap;letter-spacing:-.02em;box-shadow:none}
+.gscr .rzs{margin:8px 0}
+.gscr .rz .btn.g.w{min-height:48px}
 
-/* ===== игровые столы: стол слева во всю высоту, панель управления справа под большой палец ===== */
-body.ingame #app{grid-template-columns:minmax(0,1fr)}
-body.ingame .top{position:absolute;right:0;top:0;z-index:6;padding:calc(6px + var(--sat)) var(--rpad) 0 0;pointer-events:none}
-body.ingame .top .who{display:none}
-body.ingame .top .bal{pointer-events:auto;height:34px;white-space:nowrap}
-.scr.gscr:not(.hide),#v-bj.gscr:not(.hide),#v-pt.gscr:not(.hide){grid-column:1;grid-row:1/3;display:grid;grid-template-columns:minmax(0,1fr) var(--side);grid-template-rows:auto minmax(0,1fr);column-gap:12px;overflow:hidden;padding:calc(6px + var(--sat)) var(--rpad) calc(8px + var(--sab)) var(--lpad)}
-.gscr>*{grid-column:1;grid-row:1/3;min-width:0;min-height:0}
-.gscr>.pbar{grid-column:2;grid-row:1;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"x x" "t i";gap:6px 8px;margin:0 0 6px;align-items:center}
-.gscr>.pbar>[data-exit]{grid-area:x;justify-self:start;min-height:34px}
-.gscr>.pbar>div{grid-area:t}
-.gscr>.pbar>.btn.sm:not([data-exit]){grid-area:i}
-.gscr>.pbar b{font-size:15px;line-height:1.2;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gscr>.pbar span{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gscr>.gbot{grid-column:2;grid-row:2;justify-content:flex-end;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;min-height:0!important}
-.gscr>.gbot::-webkit-scrollbar{display:none}
-/* сукно: широкий овал во всю высоту */
-#v-poker .felt,#v-st .felt{width:auto;height:auto;max-width:none!important;max-height:none!important;aspect-ratio:auto;margin:40px 46px 17px!important;border-radius:50%/50%}
-#v-bj .bjt,#v-pt .bjt,#rgame .bjt{flex:none;height:auto;min-height:0;margin:17px!important;border-radius:30%/50%}
-.bct{min-height:0;margin:17px!important;border-radius:30%/50%;padding-top:40px}
-.dkt{height:auto!important;min-height:0!important;margin:12px!important}
-#felt,#stf{min-height:0!important;width:auto!important}
-/* мои карты в покере — чуть меньше, чтобы не налезали на банк */
-.felt .mine .cd.lg{--w:48px}.omaha .felt .mine .cd.lg{--w:42px}
-.felt .mine{bottom:3%}
-@media (max-height:375px){.felt .mine .cd.lg{--w:42px}.omaha .felt .mine .cd.lg{--w:38px}.felt .mine .av{width:34px;height:34px}}
-/* кнопки и фишки в узкой колонке */
-.chipsel{flex-wrap:wrap;margin:6px 0!important}
-.chipsel .pchip{width:42px!important;height:42px!important}
-.acts{margin-top:6px}
-.acts .btn{min-height:46px;padding:0 4px;font-size:14px;white-space:nowrap}
-.bjacts{margin-top:6px!important}
-.bjacts .btn{min-height:46px;font-size:13px;white-space:nowrap}
-.bjacts.two{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
-.bczones{grid-template-columns:1fr 1fr 1fr;gap:6px}
-.bczones .bcz{min-height:58px!important}
-.bjbot{min-height:0}.pkbot{min-height:0}
-.res{font-size:14px}
-.gbot .bjmsg,.gbot .tmsg{max-width:100%;margin:0 0 6px!important;font-size:14px;white-space:normal;height:auto;min-height:20px;line-height:1.3}
-.gbot .note{margin-top:4px}
-/* дурак: рука — под столом во всю ширину, кнопки «Беру/Бито/Пас» — справа */
-#v-dk.gscr:not(.hide){grid-template-rows:auto minmax(0,1fr) auto}
-#v-dk>.dkt{grid-row:1/3}
-#v-dk>.gbot{display:contents}
-#v-dk .dkh{grid-column:1;grid-row:3}
-#v-dk .dkbar{grid-column:2;grid-row:2/4;align-self:end;flex-direction:column;align-items:stretch;margin:0}
-#v-dk .dkbar .dka{display:grid;grid-template-columns:1fr;gap:6px;width:100%}
-#v-dk .dkbar .dkmsg{text-align:center}
-/* с другом: лобби и ожидание — по центру */
-#v-room #rlob,#v-room #rwait{grid-column:1/-1;grid-row:2;overflow-y:auto;max-width:560px;width:100%;margin:0 auto}
-#v-room #rgame:not(.hide){display:contents}
-#v-room #rgame>.gbot{grid-column:2;grid-row:2}
-#v-room #rgame>.bjt{grid-column:1;grid-row:1/3}
-/* дуэль на одном телефоне — во всю ширину */
-.duo{max-width:none;padding-left:var(--lpad);padding-right:var(--rpad)}
+/* --- стад --- */
+#v-st .stt{max-height:none!important;max-width:none!important}
+.stme{bottom:2%}
+.stpot{top:55%}
+
+/* --- блэкджек (один, онлайн, с другом) --- */
+#v-bj .bjt,#v-pt .bjt{padding:10px 10px 0}
+#v-bj #dh .cd,#v-pt #ptd .cd{--w:44px}
+#v-bj .bjt .myrow,#v-pt .bjt .myrow{bottom:3%}
+.myhands .bjh .cd{--w:50px}.myhands{min-height:calc(50px*1.395 + 30px)}
+.bspot{height:56px!important}
+#bjbet,#ptbet{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;width:100%}
+#bjins,#ptins{display:flex;align-items:flex-end;justify-content:flex-end;gap:12px;width:100%}
+#bjins .note{margin:0!important;text-align:right!important;max-width:280px;font-size:12.5px;padding:6px 10px;border-radius:10px;background:rgba(0,0,0,.5);color:#fff}
+#bjacts,#ptacts{margin-left:auto!important}
+#bjacts.hide,#ptacts.hide{display:none!important}
+#bjacts:not(.hide),#ptacts:not(.hide){display:grid!important;grid-template-columns:repeat(2,minmax(108px,auto));gap:8px}
+#bjacts .btn,#ptacts .btn{min-width:0;font-size:15px}
+/* с другом */
+#v-room #rlob,#v-room #rwait{position:absolute;left:var(--lpad);right:var(--rpad);top:calc(var(--sat) + 56px);bottom:calc(10px + var(--sab));overflow-y:auto;max-width:560px;margin:0 auto}
+#v-room #rgame:not(.hide){display:block;position:absolute;inset:0}
+#rgame .rtab{justify-content:space-evenly;padding:6px 10px}
+#racts{margin-left:auto!important}
+
+/* --- баккара и игры против дилера: ставки по центру внизу, на «сукне» --- */
+#v-bc .gbot,#v-cg .gbot{align-items:flex-end}
+.gscr .bczones{order:2;flex:1;min-width:0;max-width:330px;margin:0;gap:6px;grid-template-columns:repeat(var(--zn,3),minmax(0,1fr))}
+.gscr .bczones .bcz{min-height:60px!important;padding:6px 4px 5px;border-radius:14px;background:color-mix(in srgb,var(--card) 90%,transparent);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.gscr .bcz b{font-size:13px}.gscr .bcz span{font-size:10.5px}.gscr .bcz .bs{min-height:22px}
+#cgzones:has(>:nth-child(2):last-child){--zn:2}#cgzones:has(>:only-child){--zn:1;max-width:150px}
+.gscr .chipsel{order:1}
+.gscr .bjacts{order:3}
+.gscr .bct{display:flex;flex-direction:column;justify-content:center;padding:22px 16px 10px}
+.gscr .bcrows{gap:40px;max-width:520px;width:100%;margin:0 auto}
+.gscr .bct .bjh .cd{--w:48px}
+.gscr .bct .shoe{top:8px}
+.gscr .bct>.bjmsg{margin:6px auto}
+.gscr .bchist{margin-top:4px}
+.gscr .cgt{padding:14px 16px 10px;justify-content:space-around}
+.gscr .cgt .bjh .cd{--w:46px}
+.gscr .cgt .cgrow .bclb{margin-bottom:4px}
+
+/* баккара: поля ставок лежат на сукне, как на настоящем столе */
+#v-bc .bczones{position:absolute;left:50%;bottom:56px;transform:translateX(-50%);width:min(340px,48vw);max-width:none}
+#v-bc .bct{justify-content:flex-start;padding-top:22px}
+/* --- дурак: соперники по дуге, стол по центру, рука внизу во всю ширину, кнопки справа --- */
+#v-dk.gscr{--fb:calc(var(--sab) + 84px)}
+#v-dk .dkop .dko{width:64px}
+#v-dk .dkdeck{left:22px;top:70%}
+#v-dk .dkbito{right:26px;top:70%}
+#v-dk .dkpairs{left:110px;right:90px;top:30%;bottom:6%;grid-template-columns:repeat(6,1fr);grid-auto-rows:auto;align-content:center}
+#v-dk .gbot{height:calc(58px*1.395 + 24px)}
+#v-dk .dkh{position:absolute;left:var(--dks,236px);right:var(--dks,236px);bottom:-4px;height:calc(58px*1.395 + 24px);margin:0}
+#v-dk .dkh .cd{--w:var(--hw,58px)}
+#v-dk .dkbar{position:absolute;right:0;bottom:0;width:calc(var(--dks,236px) - 14px);height:auto;margin:0;display:block}
+#v-dk .dkmsg{position:fixed;left:var(--lpad);bottom:calc(10px + var(--sab));width:calc(var(--dks,236px) - 20px);height:auto;min-height:0;white-space:normal;line-height:1.3;font-size:13.5px;display:block;padding:7px 11px;border-radius:12px;background:rgba(0,0,0,.5);pointer-events:none}
+#v-dk .dkmsg:empty{display:none}
+#v-dk .dka{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:6px}
+#v-dk .dka .btn{min-height:46px;padding:0 6px;font-size:15px}
+
+/* очень низкие экраны (360 и меньше) */
+@media (max-height:370px){
+  .scr.gscr:not(.hide),#v-bj.gscr:not(.hide),#v-pt.gscr:not(.hide){--ft:calc(var(--sat) + 50px);--fb:calc(var(--sab) + 64px)}
+  #v-poker.gscr,#v-st.gscr,#v-bj.gscr,#v-pt.gscr{--fb:calc(var(--sab) + 14px)}
+  #v-dk.gscr{--fb:calc(var(--sab) + 78px)}
+  .gbot .btn{min-height:42px}
+  .gbot .chipsel .pchip{width:38px!important;height:38px!important}
+  .felt .mine .cd.lg{--w:44px}.omaha .felt .mine .cd.lg{--w:38px}
+  #v-bj #dh .cd,#v-pt #ptd .cd{--w:40px}.myhands .bjh .cd{--w:44px}
+  .gscr .bczones .bcz{min-height:52px!important}
+  #v-dk .gbot,#v-dk .dkh{height:calc(52px*1.395 + 22px)}#v-dk .dkh .cd{--w:var(--hw,52px)}
+  #v-home .hg button{height:calc(100vh - 150px)}
+  .tabs button{min-height:50px}.tabs::before{height:36px;width:36px;margin-bottom:2px}
+}
+/* узкие экраны (меньше 760 по ширине) */
+@media (max-width:759px){
+  .gbot .bjacts .btn{min-width:96px;padding:0 10px;font-size:14px}
+  .gbot .acts .btn{min-width:90px}
+  .gscr .bczones{max-width:250px}
+  .gscr>.pbar>div{max-width:150px}
+  #v-dk.gscr{--dks:208px}
+  .tiles{grid-template-columns:1fr;gap:6px}
+  .tiles button{min-height:0;flex-direction:row;align-items:center;gap:10px;padding:8px 34px 8px 10px;border-radius:14px}
+  .tiles i{width:34px;height:34px;margin:0;flex:none;border-radius:10px}.tiles i svg{width:20px;height:20px}
+  .tiles b{margin:0;font-size:14px;white-space:nowrap}.tiles span{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .tiles button::after{top:50%;transform:translateY(-50%)}
+  .pcode .btn{padding:0 12px;font-size:13px}
+}
 }
 </style>
 </head>
@@ -3564,7 +3699,9 @@ function tgLogin(){
   if (LOGIN && Date.now() < LOGIN.until){ openExt(LOGIN.url); loginPoll(); return; }
   apiRaw("login_start").then(function(j){ if (!j.code) throw 0;
     LOGIN = {code: j.code, url: "https://t.me/" + BOT + "?start=login_" + j.code, until: Date.now() + (j.ttl || 300) * 1000};
-    openExt(LOGIN.url); toast("Нажми «Войти» в боте и вернись в игру"); loginPoll(); }).catch(function(){ toast("Нет связи с сервером"); });
+    openExt(LOGIN.url); toast("Нажми «Войти» в боте и вернись в игру"); loginPoll(); }).catch(function(){
+    // сервер отвечает, но входа через бота на нём ещё нет (старая версия api.py) — или правда нет сети
+    fetch(API + "version", {method: "POST", mode: "no-cors", body: "{}"}).then(function(){ toast("Вход пока недоступен: сервер игры ещё не обновлён. Можно играть как гость"); }).catch(function(){ toast("Нет связи с сервером — проверь интернет"); }); });
 }
 function loginPoll(){ clearTimeout(loginPoll.t); if (!LOGIN) return;
   if (Date.now() > LOGIN.until){ LOGIN = null; toast("Код входа устарел — нажми «Войти» ещё раз"); return; }
@@ -3590,6 +3727,33 @@ function renderTop(){ $("tav").innerHTML = myAvatar(); $("tname").textContent = 
 if (TG || STOK){ ONLINE = true; boot(); api("auth").then(function(r){ if (!r.ok){ ONLINE = false; loadGuest(); if (!TG && r.j.error === "auth"){ STOK = ""; try { localStorage.removeItem("mb_token"); } catch(e){} toast("Сессия истекла — войди через Telegram снова"); } else toast("Не удалось войти, играешь как гость"); } boot(); if (VIEW === "me") renderMe(); if (r.ok) roomFromLink(); }).catch(function(){ ONLINE = false; loadGuest(); boot(); toast("Нет связи с сервером, играешь как гость"); }); }
 else { loadGuest(); boot(); }
 checkUpdate();
+</script>
+<script>
+// ---------- горизонтальная ориентация (телефон лёжа): только раскладка, правила игр не меняются ----------
+var LANDQ = window.matchMedia ? matchMedia("(orientation:landscape) and (max-height:560px)") : {matches: false};
+function isLand(){ return LANDQ.matches; }
+// текущий экран — в <body data-view>, чтобы вёрстка знала, где прятать дубли (баланс на главной и в профиле)
+(function(go0){ go = function(v){ go0(v); if ($("v-" + v)) document.body.dataset.view = v; }; })(go);
+document.body.dataset.view = VIEW;
+// главная: в горизонтали лента всех 8 игр (в портрете лишние карточки скрыты)
+(function(rh0){ renderHome = function(){ rh0();
+  $("hg").insertAdjacentHTML("beforeend", HG2.map(function(g){ return '<button class="hx" data-cg="' + g.k + '"><div class="ha" style="background:' + g.bg + '"><img src="c/g/' + g.k + '.webp?v=1" alt=""></div><b>' + g.n + '</b><span>' + g.s + '</span><em class="off">против дилера</em></button>'; }).join("") +
+    HG3.map(function(g){ return '<button class="hx" data-st="1"><div class="ha" style="background:' + g.bg + '"><img src="c/g/' + g.k + '.webp?v=1" alt=""></div><b>Стад</b><span>7 карт, торговля</span><em class="off">с ботами</em></button>'; }).join("")); }; })(renderHome);
+$("hg").addEventListener("click", function(e){ var b = e.target.closest("[data-cg],[data-st]"); if (!b) return; hap(); go("games"); if (b.dataset.cg) cgOpen(b.dataset.cg); else stOpen(); });
+if (VIEW === "home") renderHome();
+// блэкджек: боты по дуге широкого стола, чтобы не закрывать дилера, мои карты и кнопки
+var BSL_L = {0: [], 1: [[10,56]], 2: [[10,56],[90,56]], 3: [[9,60],[22,24],[91,60]], 4: [[9,60],[22,24],[78,24],[91,60]], 5: [[8,62],[19,26],[35,14],[81,26],[92,62]]};
+(function(as0){ arcSlots = function(k){ return isLand() ? BSL_L[Math.min(5, k)] : as0(k); }; })(arcSlots);
+function bjBotsPlace(){ var bs = BJ.bots || []; if (!bs.length) return; var sl = arcSlots(bs.length); bs.forEach(function(b, i){ var p = sl[i]; if (p && b.el){ b.el.style.left = p[0] + "%"; b.el.style.top = p[1] + "%"; } }); }
+// приложение на планшете: масштабируем страницу, чтобы высота была «телефонной» и включалась горизонтальная вёрстка
+function capFit(){ if (!CAP || !window.innerHeight) return; var m = document.querySelector('meta[name=viewport]'), h = screen.height < screen.width ? screen.height : Math.min(screen.width, screen.height);
+  var k = h > 560 ? Math.min(2.4, h / 430) : 1; if (capFit.k === k) return; capFit.k = k;
+  m.setAttribute("content", "width=device-width,initial-scale=" + k + ",maximum-scale=" + k + ",minimum-scale=" + k + ",user-scalable=no,viewport-fit=cover"); }
+capFit(); window.addEventListener("orientationchange", function(){ setTimeout(capFit, 200); });
+// повернули телефон: перерисовать то, что считается в пикселях
+function onTurn(){ bjBotsPlace(); if (VIEW === "dk" && typeof dkDraw === "function") dkDraw(); }
+if (LANDQ.addEventListener) LANDQ.addEventListener("change", onTurn); else if (LANDQ.addListener) LANDQ.addListener(onTurn);
+window.addEventListener("resize", function(){ clearTimeout(onTurn.t); onTurn.t = setTimeout(function(){ if (VIEW === "dk" && typeof dkDraw === "function") dkDraw(); }, 150); });
 </script>
 </body>
 </html>

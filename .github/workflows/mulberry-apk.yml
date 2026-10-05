@@ -59,7 +59,7 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
-          export APP_BUILD=$(( GITHUB_RUN_NUMBER + 1 ))  # номер сборки растёт сам; 1 — у первой сборки, сделанной вручную
+          export APP_BUILD=$(( GITHUB_RUN_NUMBER + 10 ))  # номер сборки растёт сам; 1 и 2 — сборки, сделанные вручную
           echo "APP_BUILD=$APP_BUILD" >> "$GITHUB_ENV"
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon
