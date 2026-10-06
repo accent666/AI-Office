@@ -932,6 +932,194 @@ body.ingame .top .who{display:none}
   .pcode .btn{padding:0 12px;font-size:13px}
 }
 }
+/* ===================== APK 1.2: чёрная тема, кнопки от 44px, вырез камеры, раздельная вёрстка для портрета и горизонтали =====================
+   Только оформление: правила игр, цены и работа с сервером не меняются. Весь блок можно удалить для отката. */
+:root,:root[data-theme=light],:root[data-theme=dark]{
+  --bg:#000;--card:#141416;--card2:#232326;--card3:#2c2c30;--line:rgba(255,255,255,.08);--edge:rgba(255,255,255,.07);
+  --text:#fff;--muted:#a1a1a6;--gold:#d42a5b;--gold2:#ff6b93;--on:#fff;--red:#ff6961;
+  --table:#111113;--rim:#232326;--silbg:#3a3a3e;--silfg:#a1a1a6;--back:#141416;
+  /* вырез камеры и системные панели: env() (WebView 140+) или переменные, которые подставляет Capacitor */
+  --sat:max(env(safe-area-inset-top,0px),var(--safe-area-inset-top,0px));
+  --sab:max(env(safe-area-inset-bottom,0px),var(--safe-area-inset-bottom,0px));
+  --sal:max(env(safe-area-inset-left,0px),var(--safe-area-inset-left,0px));
+  --sar:max(env(safe-area-inset-right,0px),var(--safe-area-inset-right,0px));
+  color-scheme:dark}
+html,body,#app{background:#000!important}
+body{transition:none}
+#theme{display:none!important}                       /* светлая тема выключена */
+.who span{color:var(--muted)}
+.btn.r{color:var(--red)}
+.btn{background:var(--card2)}
+.btn.g,.item .btn.g,.hbb .btn{background:var(--gold)!important;color:var(--on)!important}
+.seg button.on{background:var(--card3);color:var(--text)}
+.lbl button{color:var(--gold2)}
+.tabs{background:#000!important;box-shadow:inset 0 1px 0 var(--edge)!important}
+.tabs button.on{color:var(--text)}
+.tabs button.on svg{stroke:var(--gold2)}
+/* главный баннер — тёмно-серая карточка вместо малинового градиента */
+.hb{background:linear-gradient(160deg,#1c1c1f 0%,#121214 100%)!important;box-shadow:inset 0 0 0 1px var(--edge)!important}
+.hbb{background:rgba(255,255,255,.05)!important}
+.gg .gp{background:#fff;color:#000}
+.prof,.rows,.bon,.item,.stats div,.opt>*,.qs>*{background:var(--card)}
+.rz{background:#0b0b0c}
+.bsheet{background:#0b0b0c!important;box-shadow:0 -6px 24px rgba(0,0,0,.6),inset 0 0 0 1px var(--edge)}
+.rzbg{background:rgba(0,0,0,.6)}
+
+/* ---------- размеры: всё, что нажимают, — не меньше 44×44 ---------- */
+.btn.sm{min-height:44px}
+.pbar>.btn.sm{min-height:44px;min-width:44px}
+.rzh .btn,#tsx,#bsx,#rzx,#duox{width:44px!important;min-width:44px;height:44px;min-height:44px!important;padding:0;flex:none}
+#cghelp{width:44px!important;height:44px;min-height:44px}
+.updbar #updx{width:44px;min-height:44px}
+.seg button{min-height:44px}
+.rzp .btn{min-height:44px!important}
+.rzs .btn{min-width:44px;min-height:44px}
+.dacts .btn{min-height:44px}
+.pprice em,.arow .tg{background:var(--gold)}                     /* бейдж скидки: контраст 4.9:1 */
+.dko .pl .lv{color:var(--gold2)}
+.sts .stg{color:#fff!important}
+.dka .btn.r{background:#c93030}                                   /* «Беру»: контраст 5.3:1 */
+#bjacts .bh,#racts .bh,#ptacts .bh,.dacts .btn.bh{background:#1a8549}             /* контраст белого текста 4.7:1 */
+.pchip{min-width:44px;min-height:44px}
+.dka .btn,.bjacts .btn,.acts .btn{min-height:48px}
+.lbl button{min-height:44px;padding:0 4px;display:inline-flex;align-items:center}
+.lbl{display:flex;align-items:center;justify-content:space-between}
+.np button{min-height:44px}
+.bal{height:44px}
+.who{min-height:44px}
+.item .btn{min-height:44px}
+.hbb .btn{min-height:44px!important}
+#bsq{background:radial-gradient(90% 70% at 50% 45%,rgba(20,20,22,.6),rgba(0,0,0,.9));padding:calc(8px + var(--sat)) calc(8px + var(--sar)) calc(8px + var(--sab)) calc(8px + var(--sal))}
+#bsq .btn{min-height:48px}
+.sortb{min-height:44px}
+.fbar .sortb{height:44px}
+
+/* ---------- настройки в профиле ---------- */
+.sets{padding:2px 16px}
+.sets .setr{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.sets .setr:last-child{border:0}
+.sets .setr>span{color:var(--text);font-size:15px}
+.sets .setr small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.sets .setr.col{flex-direction:column;align-items:stretch}
+.sets .seg{margin:0;width:100%}
+.sets .seg button{font-size:13px;white-space:nowrap;padding:0 4px}
+.tgl{position:relative;flex:none;width:56px;height:44px}
+.tgl::before{content:"";position:absolute;left:2px;right:2px;top:8px;height:28px;border-radius:999px;background:var(--card3);transition:background .15s}
+.tgl::after{content:"";position:absolute;left:6px;top:12px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s}
+.tgl[aria-checked=true]::before{background:var(--gold)}
+.tgl[aria-checked=true]::after{transform:translateX(24px)}
+.prof .pic.l{display:none}                              /* звук — теперь в «Настройках» */
+
+/* ================= ПОРТРЕТ ================= */
+@media (orientation:portrait){
+  #app{padding-left:var(--sal);padding-right:var(--sar)}
+  .top{padding-top:calc(10px + var(--sat))}
+  .tabs{padding-bottom:calc(6px + var(--sab))}
+  .tabs button{min-height:52px}
+  /* главная: крупные плитки игр 2×2, баннер с балансом */
+  #v-home .hg{gap:12px}
+  #v-home .hg button:not(.hx){height:auto;aspect-ratio:4/5;min-height:170px;max-height:220px}
+  #v-home .hg b{font-size:19px}
+  /* игровые экраны: шапка, стол по центру свободного места, внизу зона кнопок */
+  .gscr>.pbar{margin-bottom:4px}
+  #felt,#v-bj .bjt,#v-pt .bjt,.dkt,.bct,.rtab,#stf{margin:12px auto!important;width:calc(100% - 12px)!important;max-width:460px}
+  .felt .mine{bottom:9%}
+  #v-st #stf{flex:1 1 auto;max-height:none!important;max-width:460px!important;aspect-ratio:auto!important;min-height:320px}
+  .gbot{padding-bottom:calc(4px + var(--sab))}
+  .gbot .acts,.gbot .bjacts{gap:8px}
+  .gbot .acts .btn,.gbot .bjacts .btn{min-height:52px;font-size:16px}
+}
+/* узкие телефоны: фишки рейза помещаются в ширину */
+@media (orientation:portrait) and (max-width:380px){.rzk{gap:4px}.rzc{gap:4px}.rzc .pchip{width:44px;height:44px}.rzstk{max-width:84px;overflow:hidden}}
+/* невысокие телефоны в портрете (до 760): стол чуть ниже, без пустоты */
+@media (orientation:portrait) and (max-height:760px){
+  #felt,#v-bj .bjt,#v-pt .bjt,.dkt,.bct,.rtab,#stf{margin:8px auto!important}
+  .felt .mine{bottom:8%}
+}
+
+/* ================= ГОРИЗОНТАЛЬ ================= */
+@media (orientation:landscape) and (max-height:560px){
+  :root{--lpad:calc(12px + var(--sal));--rpad:calc(12px + var(--sar));--rail:calc(82px + var(--sal))}
+  .tabs{background:#000!important;box-shadow:inset -1px 0 0 var(--edge)!important}
+  .tabs button.on{background:rgba(255,255,255,.06)}
+  .top .bal,body.ingame .top .bal{height:44px}
+  .scr>.pbar{min-height:44px;margin-right:170px}
+  /* шапка стола: «Выйти», «?» и «Позвать» — по 44px */
+  .scr.gscr:not(.hide),#v-bj.gscr:not(.hide),#v-pt.gscr:not(.hide){--ft:calc(var(--sat) + 60px)}
+  .gscr>.pbar{height:44px;right:calc(var(--rpad) + 170px)}
+  .gscr>.pbar>[data-exit],.gscr>.pbar>.btn.sm:not([data-exit]){height:44px;min-height:44px}
+  .gbot .btn{min-height:48px}
+  .gbot .chipsel .pchip{width:44px!important;height:44px!important}
+  .gscr .rzc .pchip{width:44px;height:44px}
+  .gscr .rzp .btn{min-height:44px}
+  /* покер и стад: кнопки — колонкой справа, сукно до них не доходит, карты и ники не перекрываются */
+  #v-poker.gscr:not(.hide),#v-st.gscr:not(.hide){--fxr:calc(var(--sar) + 140px);--fb:calc(var(--sab) + 12px)}
+  #v-poker .gbot,#v-st .gbot{left:auto;right:var(--rpad);width:120px;top:calc(var(--sat) + 60px);bottom:calc(10px + var(--sab));flex-direction:column;justify-content:flex-end;align-items:stretch}
+  #pacts:not(.hide),#stacts:not(.hide){width:100%}
+  #pacts .acts,#stacts .acts{display:flex!important;flex-direction:column;gap:8px}
+  #pacts .acts .btn,#stacts .acts .btn{width:100%;min-width:0;min-height:52px;padding:0 8px}
+  #pnext,#stnext{min-width:0!important;width:100%!important;white-space:normal;line-height:1.15;min-height:60px}
+  #v-poker .gbot>.res,#v-st .gbot>.res{left:var(--lpad);max-width:30%}
+  #v-poker .gbot>.tmsg,#v-st .gbot>.tmsg{left:calc(50% - 70px)}
+  #v-setup:not(.hide),#v-bjset:not(.hide),#v-dkset:not(.hide),#v-bcset:not(.hide){columns:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:18px;align-content:start;grid-auto-flow:row dense}
+  #v-setup>*,#v-bjset>*,#v-dkset>*,#v-bcset>*{grid-column:1;min-width:0}
+  #v-setup>.pbar,#v-bjset>.pbar,#v-dkset>.pbar,#v-bcset>.pbar{grid-column:1/-1}
+  #v-setup>.lbl,#v-bjset>.lbl,#v-dkset>.lbl,#v-bcset>.lbl{grid-column:2;grid-row:2;margin-top:0}
+  #v-setup>.opt,#v-bjset>.opt,#v-dkset>.opt,#v-bcset>.opt{grid-column:2;grid-row:3/span 5;align-self:start}
+  #v-setup>.note,#v-bjset>.note,#v-dkset>.note,#v-bcset>.note{grid-column:1/-1}
+  /* покер: ставка игрока напротив (сверху по центру) — ниже его плашки */
+  #felt .bet[style*="top: 31%"],#felt .bet[style*="top: 33%"]{margin-top:12px}
+  /* блэкджек (один и онлайн): фишки и кнопки — колонкой справа */
+  #v-bj.gscr:not(.hide),#v-pt.gscr:not(.hide){--fxr:calc(var(--sar) + 176px)}
+  #v-bj .gbot,#v-pt .gbot{left:auto;right:var(--rpad);width:154px;top:calc(var(--sat) + 60px);bottom:calc(10px + var(--sab));flex-direction:column;justify-content:flex-end;align-items:stretch;gap:8px}
+  #bjbet,#ptbet{flex-direction:column!important;align-items:stretch!important;gap:8px!important}
+  #bjbet .chipsel,#ptbet .chipsel{flex-wrap:wrap;justify-content:center;border-radius:18px;padding:6px;gap:6px}
+  #bjbet .chipsel .pchip.on,#ptbet .chipsel .pchip.on{transform:none;box-shadow:0 0 0 3px var(--gold2)}
+  #bjbet .bjacts,#ptbet .bjacts,#bjins .bjacts,#ptins .bjacts{flex-direction:column;gap:8px}
+  #v-bj .gbot .bjacts .btn,#v-pt .gbot .bjacts .btn{width:100%;min-width:0;padding:0 8px;font-size:14px;line-height:1.15;white-space:normal}
+  #bjins,#ptins{flex-direction:column!important;align-items:stretch!important;gap:8px!important}
+  #bjins .note{max-width:none;text-align:center!important;font-size:12px}
+  #bjacts:not(.hide),#ptacts:not(.hide){grid-template-columns:1fr;margin-left:0!important}
+  /* шапка стола: «?» и «Позвать» сразу за названием, а не посреди экрана */
+  .gscr>.pbar>.btn.sm:not([data-exit]){margin-left:0}
+  /* баккара и игры против дилера: нижняя панель не заходит на бортик стола */
+  #v-bc.gscr:not(.hide),#v-cg.gscr:not(.hide){--fb:calc(var(--sab) + 80px)}
+  .gscr .bczones .bcz{min-height:56px!important}
+  .gscr .cgt{padding:10px 16px 8px;justify-content:space-evenly}
+  .gscr .cgt>*,.gscr .bct>*{flex-shrink:0}
+  .gscr .cgt .bjh .cd{--w:42px}
+  .gscr .cgt .bjh{min-height:calc(42px*1.395)}
+  .gscr .cgt>.bjmsg{margin:2px auto;line-height:24px;min-height:24px}
+  /* с другом (1 на 1): соперник слева, банк и сообщение по центру, вы справа — всё помещается на столе */
+  #rgame .rtab{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(170px,auto) minmax(0,1fr);grid-template-rows:auto auto auto;align-content:center;justify-items:center;row-gap:6px;column-gap:10px;padding:10px 28px}
+  #rgame .rmid .bjmsg{max-width:none}
+  #rgame .rtab>.rwho:has(#ron){grid-column:1;grid-row:1}
+  #roh{grid-column:1;grid-row:2}#rot{grid-column:1;grid-row:3}
+  #rgame .rtab>.rmid{grid-column:2;grid-row:1/4;align-self:center}
+  #rgame .rtab>.rwho:has(#rms){grid-column:3;grid-row:1}
+  #rmh{grid-column:3;grid-row:2}#rmt{grid-column:3;grid-row:3}
+  /* вдвоём на одном экране: игроки слева и справа (второй — перевёрнут), счёт посередине */
+  .duo{max-width:none;flex-direction:row;gap:8px;padding:calc(6px + var(--sat)) calc(8px + var(--sar)) calc(6px + var(--sab)) calc(8px + var(--sal))}
+  .duo .dh{flex:1 1 0;min-width:0;padding:10px 12px}
+  .duo .dh.top{position:static;top:auto;right:auto;left:auto;z-index:auto;pointer-events:auto;gap:normal}  /* класс .top здесь — не шапка приложения */
+  .duo .dmid{flex-direction:column;justify-content:center;gap:12px;height:auto;width:72px;padding:0}
+  .duo .dml{width:auto;text-align:center}
+  .duo .dcs .cd{--w:50px}.duo .dcards{min-height:calc(50px*1.395 + 26px)}
+  /* рейз: шторка справа поверх кнопок, кнопка «Рейз» внизу */
+  .gscr .rz{width:calc(310px + var(--sar))}
+}
+@media (orientation:landscape) and (max-height:370px){
+  .scr.gscr:not(.hide),#v-bj.gscr:not(.hide),#v-pt.gscr:not(.hide){--ft:calc(var(--sat) + 58px)}
+  #v-bc.gscr:not(.hide),#v-cg.gscr:not(.hide){--fb:calc(var(--sab) + 74px)}
+  .gscr .cgt .bjh .cd,.gscr .bct .bjh .cd{--w:38px}
+  .gscr .cgt .bjh,.gscr .bct .bjh{min-height:calc(38px*1.395)}
+  .gscr .bczones .bcz{min-height:52px!important}
+  #v-poker.gscr:not(.hide),#v-st.gscr:not(.hide){--fb:calc(var(--sab) + 8px)}
+  .gbot .btn{min-height:46px}
+  .gbot .chipsel .pchip{width:44px!important;height:44px!important}
+  #pacts .acts .btn,#stacts .acts .btn{min-height:48px}
+}
+/* выбранная ориентация (в браузере без плагина — только подсказка для вёрстки) */
 </style>
 </head>
 <body>
@@ -1196,6 +1384,11 @@ body.ingame .top .who{display:none}
     <div class="prof"><button class="pic l" id="sound" title="Звук"></button><button class="pic r" id="theme" title="Тема"></button><div class="av" id="pav"></div><b id="pname"></b><span id="puser"></span><div class="bigbal" id="pbal"></div></div>
     
     <div class="rows nav"><button data-go="inv"><span>Инвентарь</span><i>›</i></button><button data-go="shop"><span>Маркет</span><i>›</i></button><button data-go="adm" id="admgo" class="hide"><span>Админка</span><i>›</i></button></div>
+    <div class="lbl">Настройки</div>
+    <div class="rows sets" id="sets">
+      <div class="setr"><span>Звук<small>фишки, карты, выигрыш</small></span><button class="tgl" id="setsnd" role="switch" aria-checked="true" aria-label="Звук"></button></div>
+      <div class="setr col"><span>Ориентация экрана<small id="setorn">Авто — как повёрнут телефон</small></span><div class="seg" id="setor"><button data-o="auto">Авто</button><button data-o="portrait">Вертикальная</button><button data-o="landscape">Горизонтальная</button></div></div>
+    </div>
     <div id="pacc"></div>
     <div class="lbl">Промокод</div>
     <div class="rcode pcode"><input id="promo" maxlength="24" placeholder="Введи промокод" autocomplete="off" autocapitalize="characters"><button class="btn g" id="promob">Активировать</button></div>
@@ -1237,10 +1430,10 @@ if (TG){ try { TG.ready(); TG.expand(); if (TG.disableVerticalSwipes) TG.disable
 else if (STOK){ try { TU = JSON.parse(localStorage.getItem("mb_user") || "null"); } catch(e){} }
 // ---------- тема: авто (как в Telegram) / тёмная / светлая ----------
 var THEME = ""; try { THEME = localStorage.getItem("riviera_theme") || ""; } catch(e){}
-if (THEME !== "dark" && THEME !== "light") THEME = "dark";
+THEME = "dark"; // APK 1.2: светлая тема выключена
 function applyTheme(){
   var t = THEME;
-  document.documentElement.dataset.theme = t; var bg = t === "light" ? "#f6f1ed" : "#0d090b";
+  document.documentElement.dataset.theme = t; var bg = "#000000";
   if (TG){ try { TG.setHeaderColor(bg); TG.setBackgroundColor(bg); if (TG.setBottomBarColor) TG.setBottomBarColor(t === "light" ? "#f6f1ed" : "#0d090b"); } catch(e){} }
   var tb = document.getElementById("theme"); tb.dataset.th = THEME === "dark" ? "light" : "dark"; // иконка = текущая тема, тап — переключить
   tb.innerHTML = THEME === "dark" ? '<svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>' : '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>';
@@ -1902,7 +2095,7 @@ function bjClear(){ $("dh").innerHTML = ""; $("dt").innerHTML = ""; $("phs").inn
 
 // ---------- главная, бонус ----------
 var LIVE = null;
-var VERSION = "Release 1.1";
+var VERSION = "Release 1.2";
 var HG = [{k: "pk", n: "Покер", s: "Холдем · Омаха", d: "Блеф, рейзы, олл-ины", go: "setup", bg: "#0b4a2f"}, {k: "bj", n: "Блэкджек", s: "21 против дилера", d: "Собери 21 у дилера", go: "bjset", bg: "#12306e"},
   {k: "dk", n: "Дурак", s: "подкидной и переводной", d: "Не будь дураком", go: "dkset", bg: "#701226"}, {k: "bc", n: "Баккара", s: "игрок или банкир", d: "Кто ближе к девяти", go: "bcset", bg: "#3b1870"}];
 function renderHome(){ renderQuick();
@@ -3761,6 +3954,21 @@ capFit(); window.addEventListener("orientationchange", function(){ setTimeout(ca
 function onTurn(){ bjBotsPlace(); if (VIEW === "dk" && typeof dkDraw === "function") dkDraw(); }
 if (LANDQ.addEventListener) LANDQ.addEventListener("change", onTurn); else if (LANDQ.addListener) LANDQ.addListener(onTurn);
 window.addEventListener("resize", function(){ clearTimeout(onTurn.t); onTurn.t = setTimeout(function(){ if (VIEW === "dk" && typeof dkDraw === "function") dkDraw(); }, 150); });
+
+// ---------- APK 1.2: настройки — звук и ориентация экрана (Авто / Вертикальная / Горизонтальная) ----------
+var ORIENT = "auto"; try { ORIENT = localStorage.getItem("mb_orient") || "auto"; } catch(e){}
+if (["auto", "portrait", "landscape"].indexOf(ORIENT) < 0) ORIENT = "auto";
+var ORN = {auto: "Авто — как повёрнут телефон", portrait: "Всегда вертикально", landscape: "Всегда горизонтально"};
+function applyOrient(save){ document.documentElement.dataset.orient = ORIENT;
+  if (save){ try { localStorage.setItem("mb_orient", ORIENT); } catch(e){} }
+  if (CAP) CAP.nativePromise("Orientation", "set", {mode: ORIENT}).catch(function(){});
+  [].forEach.call($("setor").children, function(b){ b.classList.toggle("on", b.dataset.o === ORIENT); });
+  $("setorn").textContent = ORN[ORIENT]; }
+function renderSets(){ $("setsnd").setAttribute("aria-checked", SOUND ? "true" : "false"); }
+$("setor").onclick = function(e){ var b = e.target.closest("[data-o]"); if (!b || b.dataset.o === ORIENT) return; ORIENT = b.dataset.o; hap(); applyOrient(true); };
+$("setsnd").onclick = function(){ $("sound").click(); renderSets(); };
+(function(rs0){ renderSound = function(){ rs0(); renderSets(); }; })(renderSound);
+applyOrient(false); renderSets();
 </script>
 </body>
 </html>
