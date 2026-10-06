@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="336" viewBox="0 0 240 336"><defs><pattern id="p" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H16M0 0V16" stroke="#ffcc00" stroke-opacity=".35" stroke-width="1"/></pattern></defs>
+<rect x=".5" y=".5" width="239" height="335" rx="12" fill="#fff" stroke="#00000033"/>
+<rect x="11" y="11" width="218" height="314" rx="6" fill="#111"/>
+<rect x="11" y="11" width="218" height="314" rx="6" fill="url(#p)"/>
+<rect x="19" y="19" width="202" height="298" rx="3" fill="none" stroke="#ffcc00" stroke-width="1.5"/><circle cx="120" cy="168" r="34" fill="#111" stroke="#ffcc00" stroke-width="2"/><text x="120" y="184" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="46" fill="#ffcc00">R</text></svg>
