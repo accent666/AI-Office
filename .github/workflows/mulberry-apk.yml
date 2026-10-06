@@ -1,5 +1,6 @@
 # Сборка Android-приложения MULBERRY (Capacitor) в подписанный release-APK.
-# Запуск: вкладка Actions → «MULBERRY APK» → Run workflow (или пуш в mulberry-app/).
+# Запуск только вручную: вкладка Actions → «MULBERRY APK» → Run workflow
+# (автозапуска при пуше нет, чтобы без секретов не было красных запусков).
 # Ключ подписи берётся из секретов репозитория (Settings → Secrets and variables → Actions):
 #   MB_KEYSTORE_BASE64   — файл mulberry-release.jks в base64
 #   MB_KEYSTORE_PASSWORD — пароль хранилища
@@ -9,10 +10,6 @@ name: MULBERRY APK
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "mulberry-app/**"
-      - ".github/workflows/mulberry-apk.yml"
 
 jobs:
   build:
