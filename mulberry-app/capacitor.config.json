@@ -1,0 +1,25 @@
+{
+	"appId": "club.mulberry.game",
+	"appName": "MULBERRY",
+	"webDir": "www",
+	"backgroundColor": "#000000",
+	"android": {
+		"backgroundColor": "#000000",
+		"allowMixedContent": false,
+		"webContentsDebuggingEnabled": false
+	},
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 600,
+			"launchAutoHide": true,
+			"backgroundColor": "#000000",
+			"androidScaleType": "CENTER_INSIDE",
+			"showSpinner": false
+		},
+		"StatusBar": {
+			"overlaysWebView": true,
+			"style": "DARK",
+			"backgroundColor": "#000000"
+		}
+	}
+}
